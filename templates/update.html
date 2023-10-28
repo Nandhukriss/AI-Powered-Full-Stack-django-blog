@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+          
+          <h1 class="display-5 text-center m-3 text-danger fw-bold  ">Edit a Post</h1>
+
+<!-- <div class="container text-center">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Post</button>
+    </form>
+</div> -->
+
+
+<div class="container text-center">
+    <main class="form-signin w-100 m-auto">
+        <form method="post">
+            {% csrf_token %}
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="name" value="{{selected_post.name}}">
+            <label for="floatingInput">Name</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingPassword" placeholder="Title" name="title" value="{{selected_post.title}}"> 
+            <label for="floatingPassword">Title</label>
+          </div>
+          <div class="mb-3">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write Your Content Here..." name="content">{{ selected_post.content }}</textarea>
+          </div>
+          
+          <button class="btn btn-danger w-50" type="submit">Post</button>
+        </form>
+      </main>
+</div>
+{% endblock content %}
