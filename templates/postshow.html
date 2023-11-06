@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<h1 class="display-2 m-4">Users Post</h1>
+
 <div class="container-fluid">
     <div class="row">
     {% for post in posts %}
@@ -12,7 +12,7 @@
             <div class="card-body text-light bg-dark">
                 <div class="row">
                     <h5 class="card-title text-warning col-10"><strong>{{post.name|capfirst}}</strong></h5>
-                    <a href="{% url 'delete' post.id %}" class="col-1"><i class="fa-solid fa-trash" style="color: #fff;cursor: pointer;"></i></a>
+                    <a href="{% url 'delete' post.id %} " class="col-1"><i class="fa-solid fa-trash" style="color: #fff;cursor: pointer;"></i></a>
                     <a href="{% url 'edit' post.id %}" class="col-1"><i class="fa-regular fa-pen-to-square" style="color: #fff;cursor: pointer"></i></a>
                 </div>
                 <p class="text-light">{{post.date_added}}</p>
@@ -25,7 +25,8 @@
 
     {% endfor  %}
     </div>
-    <div class="container d-flex  justify-content-center mt-5 ">
+
+    <!-- <div class="container d-flex  justify-content-center mt-5 ">
         <nav aria-label="...">
             <ul class="pagination ">
               <li class="page-item disabled ">
@@ -42,5 +43,19 @@
             </ul>
           </nav>
     </div>
-</div>
+</div> -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$.ajax({
+  method: "POST",
+  url: "/delete/",
+  data: "data",
+  dataType: "dataType",
+  success: function (response) {
+    
+  }
+});
+
+</script>
 {% endblock content %}
