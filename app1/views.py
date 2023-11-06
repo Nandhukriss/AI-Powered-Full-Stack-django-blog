@@ -5,21 +5,7 @@ from .forms import PostForm
 # Create your views here.
 
 
-# def index(request):
-#         return HttpResponse("This is from http response")
 
-
-
-
-# def post(request):
-#     if request.POST:
-#         form=PostForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-
-#     else:
-#         form=PostForm()
-#     return render (request,'post.html',{"form":form})
 
 def post(request):
     if request.POST:
@@ -32,9 +18,8 @@ def post(request):
         form.save()
         return redirect("view_post")
 
-    else:
-        form=PostForm()
-    return render (request,'post.html',{"form":form})
+
+    return render (request,'post.html')
 
 
 def view_post(request):
