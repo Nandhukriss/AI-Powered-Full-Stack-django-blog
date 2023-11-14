@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import Post
-from .forms import PostForm
+
 # Create your views here.
 
 def post(request):
@@ -15,7 +15,7 @@ def post(request):
         form.save()
         return redirect("view_post")
     
-    return render (request,'post.html',{"form":form})
+    return render (request,'post.html')
 
 
 def view_post(request):
@@ -39,10 +39,10 @@ def edit_post(request, id):
 
     selected_post = get_object_or_404(Post, pk=id)
     if request.POST:
-        form = PostForm(request.POST, instance=selected_post)
+        form = Post(request.POST, instance=selected_post)
         form.save()
         return redirect('view_post')
 
     form = PostForm(instance=selected_post)
 
-    return render(request, 'update.html', {"form": form, "selected_post": selected_post})
+    return render(request, 'update.html')
