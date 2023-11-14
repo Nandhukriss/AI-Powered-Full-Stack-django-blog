@@ -36,13 +36,21 @@ def delete_post(request, id):
 
 
 def edit_post(request, id):
-
     selected_post = get_object_or_404(Post, pk=id)
-    if request.POST:
-        form = Post(request.POST, instance=selected_post)
-        form.save()
+
+    if request.method == 'POST':
+        
+        name = request.POST.get('name')
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+
+        # Update the selected post with the new data
+        selected_post.title = title
+        selected_post.name = name
+        selected_post.content = content
+        selected_post.save()
+
         return redirect('view_post')
 
-    form = PostForm(instance=selected_post)
-
-    return render(request, 'update.html')
+    
+    return render(request, 'update.html', {'selected_post': selected_post})
