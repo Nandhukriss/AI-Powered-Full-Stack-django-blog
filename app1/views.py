@@ -1,12 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import Post
-<<<<<<< HEAD
 from .forms import PostForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-=======
-
->>>>>>> 2334ba9a5b6bb1efe6f1e785f12285bc906ee04e
 # Create your views here.
 
 # def post(request):
@@ -34,11 +30,7 @@ def post(request):
 
     form=PostForm()
     
-<<<<<<< HEAD
     return render (request,'post.html',{'form':form})
-=======
-    return render (request,'post.html')
->>>>>>> 2334ba9a5b6bb1efe6f1e785f12285bc906ee04e
 
 
 def view_post(request):
