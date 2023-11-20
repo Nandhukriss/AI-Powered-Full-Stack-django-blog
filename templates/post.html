@@ -1,22 +1,24 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}   
+<h1 class="display-5 text-center m-3 text-danger fw-bold  ">Write a Post</h1>
 
-
-
-{% block content %}
-
-          
-          <h1 class="display-5 text-center m-3 text-danger fw-bold  ">Write a Post</h1>
-
-<!-- <div class="container text-center">
-    <form action="" method="post">
+<div class="container text-center w-50 ">
+    <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{form.as_p}}
+        {{form|crispy}}
         <button type="submit">Post</button>
     </form>
-</div> -->
+</div>
 
 
-<div class="container text-center">
+<!-- sidebar start -->
+
+
+<!-- sidebar end -->
+
+
+<!-- <div class="container text-center">
     <main class="form-signin w-100 m-auto">
         <form method="post">
             {% csrf_token %}
@@ -35,5 +37,10 @@
           <button class="btn btn-danger w-50" type="submit">Post</button>
         </form>
       </main>
-</div>
+</div> -->
+<script src="/build/constrast-bootstrap-pro/js/cdb.js"></script>
+<script>
+  const sidebar = document.querySelector('.sidebar');
+  new CDB.Sidebar(sidebar);
+</script>
 {% endblock content %}
