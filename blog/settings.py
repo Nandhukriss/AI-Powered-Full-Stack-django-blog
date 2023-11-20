@@ -138,7 +138,7 @@ MEDIA_URL = '/media/'
 
 STATIC_URL = 'static/'
 
-CSRF_TRUSTED_ORIGINS=['https://blog-using-django-dev-xqfa.4.us-1.fl0.io']
+CSRF_TRUSTED_ORIGINS=['*']
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
