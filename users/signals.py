@@ -14,7 +14,7 @@
 #         email_template = 'account_created.html'
 #         email_body = render_to_string(
 #             email_template, {'customer': instance.username})
-#         subject = 'Welcome to Your E-commerce App'
+#         subject = 'Welcome to Blog App'
 #         from_email = 'nandhu.r.s.krishna@gmail.com'
 #         recipient_list = [instance.email]
 #         email = EmailMessage(subject, email_body, from_email, recipient_list)
