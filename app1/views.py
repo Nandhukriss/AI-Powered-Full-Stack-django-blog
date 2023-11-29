@@ -4,6 +4,7 @@ from .models import Post
 from .forms import PostForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 # Create your views here.
 @login_required(login_url='login')
 def post(request):
@@ -44,8 +45,12 @@ def view_post(request):
         page_obj = p.page(p.num_pages)
 
     
+    # Filter admin posts based on the admin user
+    admin_user = get_object_or_404(User, username='nandhu')
+    admin_posts = Post.objects.filter(name=admin_user).order_by('-date_added').first()
+
     latest_Post = Post.objects.order_by('-date_added')[:2]
-    context = {'page_obj': page_obj,'latest_posts':latest_Post}
+    context = {'page_obj': page_obj,'latest_posts':latest_Post,'admin_posts':admin_posts}
 
     return render(request, 'postshow.html', context)
 
