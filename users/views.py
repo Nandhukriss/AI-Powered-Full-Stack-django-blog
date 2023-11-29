@@ -4,8 +4,9 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_protect
 
-
+@csrf_protect
 def user_login(request):
     if request.method=='POST':
         username=request.POST.get('username')
@@ -20,6 +21,9 @@ def user_login(request):
     return render(request,"login.html")
 
 
+
+
+@csrf_protect
 def user_register(request):
     if request.method=='POST':
         uname=request.POST.get('username')
