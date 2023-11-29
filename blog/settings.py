@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'app1',
     'crispy_forms',
     "crispy_bootstrap5",
+    
+    'users'
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -138,11 +140,11 @@ MEDIA_URL = '/media/'
 
 STATIC_URL = 'static/'
 
-CSRF_TRUSTED_ORIGINS=['*']
+# CSRF_TRUSTED_ORIGINS=['*']
 
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

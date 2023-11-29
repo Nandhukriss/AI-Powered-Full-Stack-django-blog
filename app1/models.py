@@ -11,8 +11,7 @@ CATEGORY_CHOICES = (
 
 class Post(models.Model):
     name=models.ForeignKey(User,on_delete=models.CASCADE)
-    title=models.CharField(max_length=255)
-    content=models.CharField(max_length=250)
+    title=models.TextField()
     blog_content=models.TextField(default="")
     date_added=models.DateField(auto_now_add=True,null=True,blank=True)
     post_image=models.ImageField(upload_to='Posts',default='uploads/Posts/default.png')

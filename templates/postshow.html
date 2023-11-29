@@ -18,21 +18,91 @@
         }
       }
 
-      #cover{
-        background-image: url("http://thepursuitoflearning.weebly.com/uploads/7/7/9/5/77955410/edulinkedin2_orig.png");
-        height: 450px;
-        width: 100%;
-        overflow: hidden;
-        object-fit: cover
+      #cover {
+      background-image: url("http://thepursuitoflearning.weebly.com/uploads/7/7/9/5/77955410/edulinkedin2_orig.png");
+      width: 100%;
+      overflow: hidden;
+      object-fit: cover;
+      height: 450px; /* Default height for larger screens */
+      
+      /* Adjust height for smaller screens */
+      @media (max-width: 767px) {
+        
+        background-image: url("https://abound.college/finishcollege/wp-content/uploads/sites/2/2022/03/best-online-bachelor-degree-programs-of-2021-1100x672.jpeg");
+        
+      overflow: hidden;
+      object-fit: cover;
+      height: 450px;
       }
- 
-  </style>
+      }
 
-  
-  <!-- Custom styles for this template -->
-  <link href="https://fonts.googleapis.com/css?family=Amiri:wght@400;700&amp;display=swap" rel="stylesheet">
-  <!-- Custom styles for this template -->
-  <link href="../blog/blog.rtl.css" rel="stylesheet">
+      /* Additional styles for the content within the cover */
+
+      @media (max-width: 768px) {
+      #cover {
+      height: 300px;  /* Adjust the height for smaller screens */
+      width:500px; /* Adjust the height for smaller screens */
+      }
+      }
+.card-img-top {
+    /*height: 11vw;*/
+    object-fit: cover;
+    
+}
+  /* Small devices (landscape phones, 576px and up) */
+  @media (min-width: 576px) {
+    .card-img-top {
+        height: 19vw;
+    }
+  }
+  /* Medium devices (tablets, 768px and up) */
+  @media (min-width: 768px) {
+    .card-img-top {
+        height: 16vw;
+    }
+  }
+  /* Large devices (desktops, 992px and up) */
+  @media (min-width: 992px) {
+    .card-img-top {
+        height: 11vw;
+    }
+  }
+  /* Extra large devices (large desktops, 1200px and up) */
+  @media (min-width: 992px) {
+    .card-img-top {
+        height: 11vw;
+    }
+  }
+    .pagination .page-item {
+        margin: 0 5px;
+    }
+
+    .pagination .page-link {
+        color: #000000;
+        background-color: #ffffff;
+             border-color:#fff ;
+    }
+
+    .pagination .page-link:hover {
+        color: #ffffff;
+        background-color: #000000;
+        border: 1px solid #fff;
+    }
+
+    .pagination .page-item.active .page-link {
+        z-index: 3;
+        color: #ffffff;
+        background-color: #000000;
+             box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(229, 227, 223, 0.6);
+    }
+
+    .pagination .page-link:focus,
+    .pagination .page-link:active {
+      box-shadow: none; /* Remove the default box shadow */
+        outline: none; /* Remove the default outline */
+      
+    }
+  </style>
 </head>
 <body>
 
@@ -43,44 +113,56 @@
 
 </div>
 
-<main class="container">
+<main class="container-fluid">
 <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary" id="cover">
-  <div class="col-lg-6 px-0 h-25" >
+  <div class="col-lg-6 px-0 w-100  h-25" >
    
   </div>
 </div>
-
 <div class="row align-items-md-stretch">
-  <div class="col-md-6">
-    <div class="h-100 p-5 text-bg-dark rounded-3">
-      <h2>Change the background</h2>
-      <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then, mix and match with additional component themes and more.</p>
-      <button class="btn btn-outline-light" type="button">Example button</button>
+    {% for post in latest_posts %}
+    <div class="col-md-6 mb-2">
+        <div class="h-100 p-5 text-bg-dark rounded-3">
+            <!-- Add your content here -->
+            <!-- <h2>{{ post.title }}</h2> -->
+            <p>{% if post.blog_content|length > 20 %}{{ post.blog_content|slice:":24" }}...{% else %}{{ post.blog_content }}{% endif %}</p>
+            <a href="{% url 'post_detail' post.id  %}" class="btn btn-dark text-light fw-bold" type="button">Read More ...</a>
+        </div>
     </div>
-  </div>
-  <div class="col-md-6">
-    <div class="h-100 p-5 bg-body-tertiary border rounded-3">
-      <h2>Add borders</h2>
-      <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure to look under the hood at the source HTML here as we've adjusted the alignment and sizing of both column's content for equal-height.</p>
-      <button class="btn btn-outline-secondary" type="button">Example button</button>
-    </div>
-  </div>
+    {% endfor %}
 </div>
+
 
   <!--Main layout-->
   <main class="my-5">
     <div class="container">
-        <!-- Every Posts -->
+    <!-- Every Posts -->
 
 <section class="bsb-blog-5 py-3 py-md-5 py-xl-8">
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
-        <h2 class="display-5 mb-4 mb-md-5 text-center">Latest Articles</h2>
+        <h2 id="category-title" class="display-5 mb-4 mb-md-5 text-center">
+          <!-- Content will be dynamically updated by JavaScript -->
+        </h2>
         <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
       </div>
     </div>
   </div>
+
+      <!-- Dropdown for selecting category -->
+      <form method="get">
+        <div class="input-group w-100 w-md-25 ">
+          <select name="category" id="category" class="form-select">
+              <option value="">All Categories</option>
+              <option value="Tech" {% if selected_category == 'Tech' %}selected{% endif %}>Tech</option>
+              <option value="Entertainment" {% if selected_category == 'Entertainment' %}selected{% endif %}>Entertainment</option>
+              <option value="Educational" {% if selected_category == 'Educational' %}selected{% endif %}>Educational</option>
+          </select>
+          <button type="submit" class="btn btn-dark">Filter</button>
+        </div>
+    </form>
+
 
   <div class="container overflow-hidden" id="articles">
     <div class="row gy-4 gy-md-5 gx-xl-6 gy-xl-6 gx-xxl-9 gy-xxl-9">
@@ -88,9 +170,9 @@
       <div class="col-12 col-lg-4">
         <article>
           <div class="card border-0 bg-transparent">
-            <figure class="card-img-top mb-4 overflow-hidden bsb-overlay-hover">
+            <figure class="card-img-top mb-4 overflow-hidden bsb-overlay-hover ">
               <a href="{% url 'post_detail' post.id  %}">
-                <img class="img-fluid bsb-scale bsb-hover-scale-up" loading="lazy" src="{{post.post_image.url}}" alt="noimage">
+                <img class="img-fluid bsb-scale bsb-hover-scale-up " loading="lazy" src="{{post.post_image.url}}" alt="noimage" height="500px">
               </a>
               <figcaption>
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-eye text-white bsb-hover-fadeInLeft" viewBox="0 0 16 16">
@@ -104,7 +186,7 @@
               <div class="entry-header mb-3">
   
                 <h2 class="card-title entry-title h4 m-0 ">
-                  <a class="link-dark text-decoration-none" href="#!">{{post.content}}</a>
+                  <a class="link-dark text-decoration-none" href="#!">{{post.title}}</a>
                 </h2>
               </div>
             </div>
@@ -116,7 +198,7 @@
                       <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
                       <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
                     </svg>
-                    <span class="ms-2 fs-7">11 Dec 2030</span>
+                    <span class="ms-2 fs-7">{{post.date_added}}</span>
                   </a>
                 </li>
                 <li>
@@ -145,34 +227,54 @@
       
 
       <!-- Pagination -->
-      <!-- <nav class="my-4" aria-label="...">
+     <nav class="my-4" aria-label="...">
         <ul class="pagination pagination-circle justify-content-center">
-          <li class="page-item">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+          <li class="page-item  ">
+            {%if page_obj.has_previous %} {# whether the previous page exists #}
+            <a class="page-link" href="?page={{page_obj.previous_page_number}}" tabindex="-1" aria-disabled="true">Previous</a>
+            {% endif %}
           </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item active" aria-current="page">
-            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+          {% for num in page_obj.paginator.page_range %}
+          <li class="page-item {% if num == page_obj.number %}active{% endif %}">
+              <a class="page-link" href="?page={{ num }}">{{ num }}</a>
           </li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          {% endfor %}
           <li class="page-item">
-            <a class="page-link" href="#">Next</a>
+            {%if page_obj.has_next %} {# whether the next page exists #}
+            <a class="page-link" href="?page={{page_obj.next_page_number}}">Next</a>
+            {% endif %}
           </li>
         </ul>
-      </nav> -->
-      
-        {%if page_obj.has_previous %} {# whether the previous page exists #}
-            <a href="?page={{page_obj.previous_page_number}}"><</a> {# link to the prev page #}
-        {% endif %}
-        <span>{{page_obj.number}}</span> {# the current page number #}
-       
-        {%if page_obj.has_next %} {# whether the next page exists #}
-            <a href="?page={{page_obj.next_page_number}}">></a> {# link to the next page #}
-        {% endif %}
-    
+      </nav> 
     </div>
   </main>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Function to get a query parameter from the URL
+    function getUrlParameter(name) {
+      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+      var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+      var results = regex.exec(window.location.search);
+      return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+    // Get the value of the 'category' parameter from the URL
+    var selectedCategory = getUrlParameter('category');
+
+    var categoryTitleElement = document.getElementById('category-title');
+    var category = document.getElementById('category');
+
+    // Update the content of the h2 element based on the selected category
+    if (selectedCategory) {
+      categoryTitleElement.textContent = 'Posts On ' + selectedCategory;
+    } else {
+      categoryTitleElement.textContent = 'All Categories';
+    }
+
+    
+  });
+</script>
 
 {% endblock content %}
