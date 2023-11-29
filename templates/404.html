@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-wrap d-flex flex-row align-items-center mt-5 h-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 d-flex justify-content-center">
+            </div>
+            <div class="col-md-12 text-center">
+                <span class="display-1 d-block">404</span>
+                <div class="mb-2 lead fs-3">Oops.. Page You are looking For is Not Available 😬</div>
+                <a href="{% url 'view_post' %}" class="btn btn-dark ">GO To Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
