@@ -44,35 +44,35 @@
       width:500px; /* Adjust the height for smaller screens */
       }
       }
-.card-img-top {
-    /*height: 11vw;*/
+/* .card-img-top {
+  
     object-fit: cover;
     
 }
-  /* Small devices (landscape phones, 576px and up) */
+
   @media (min-width: 576px) {
     .card-img-top {
         height: 19vw;
     }
   }
-  /* Medium devices (tablets, 768px and up) */
+
   @media (min-width: 768px) {
     .card-img-top {
         height: 16vw;
     }
   }
-  /* Large devices (desktops, 992px and up) */
+
   @media (min-width: 992px) {
     .card-img-top {
         height: 11vw;
     }
   }
-  /* Extra large devices (large desktops, 1200px and up) */
+
   @media (min-width: 992px) {
     .card-img-top {
         height: 11vw;
     }
-  }
+  } */
     .pagination .page-item {
         margin: 0 5px;
     }
@@ -122,18 +122,17 @@
     </div>
   </div>
 </div>
-<div class="row align-items-md-stretch">
+<!-- <div class="row align-items-md-stretch">
     {% for post in latest_posts %}
     <div class="col-md-6 mb-2">
         <div class="h-100 p-5 text-bg-dark rounded-3">
-            <!-- Add your content here -->
-            <!-- <h2>{{ post.title }}</h2> -->
+
             <p class="fst-italic">{% if post.blog_content|length > 130 %}{{ post.blog_content|slice:":140" }}...{% else %}{{ post.blog_content }}{% endif %}</p>
             <a href="{% url 'post_detail' post.id  %}" class="btn btn-dark text-light fw-bold" type="button">Read More ...</a>
         </div>
     </div>
     {% endfor %}
-</div>
+</div> -->
 
 
   <!--Main layout-->

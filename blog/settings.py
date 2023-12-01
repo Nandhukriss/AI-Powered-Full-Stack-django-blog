@@ -145,11 +145,11 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR/'static/'
 
 
-CSRF_TRUSTED_ORIGINS=['*']
+# CSRF_TRUSTED_ORIGINS=['*']
 
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

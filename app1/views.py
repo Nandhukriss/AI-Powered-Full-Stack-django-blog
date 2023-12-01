@@ -30,12 +30,12 @@ def post(request):
 
 def view_post(request):
     
-    all_posts = Post.objects.all()
+    all_posts = Post.objects.all().order_by('-date_added')
     # Filter posts based on category
     category = request.GET.get('category', '')
 
     if category:
-        all_posts = all_posts.filter(Category=category)
+        all_posts = all_posts.filter(Category=category).order_by('-date_added')
     
     p = Paginator(all_posts, 2)
     page_number = request.GET.get('page')
