@@ -37,7 +37,7 @@ def view_post(request):
     if category:
         all_posts = all_posts.filter(Category=category).order_by('-date_added')
     
-    p = Paginator(all_posts, 2)
+    p = Paginator(all_posts, 6)
     page_number = request.GET.get('page')
     try:
         page_obj = p.get_page(page_number)  # returns the desired page object
