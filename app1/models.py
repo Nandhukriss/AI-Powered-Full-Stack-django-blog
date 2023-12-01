@@ -14,7 +14,7 @@ class Post(models.Model):
     title=models.TextField()
     blog_content=models.TextField(default="")
     date_added=models.DateField(auto_now_add=True,null=True,blank=True)
-    post_image=models.ImageField(upload_to='Posts',default='uploads/Posts/default.png')
+    post_image=models.ImageField(upload_to='uploads/',null=True,blank=True)
     Category= models.CharField(max_length=255,choices=CATEGORY_CHOICES,default="Entertainment")
 
     def __str__(self) :
