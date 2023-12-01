@@ -59,7 +59,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
 ROOT_URLCONF = 'blog.urls'
 
 TEMPLATES = [
@@ -135,7 +134,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-MEDIA_ROOT = BASE_DIR/'uploads/'
+MEDIA_ROOT = BASE_DIR/'uploads'
 MEDIA_URL = '/media/'
 
 
