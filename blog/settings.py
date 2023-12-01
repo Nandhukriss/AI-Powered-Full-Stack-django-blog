@@ -140,6 +140,8 @@ MEDIA_URL = '/media/'
 
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR/'static/'
+
 
 # CSRF_TRUSTED_ORIGINS=['*']
 

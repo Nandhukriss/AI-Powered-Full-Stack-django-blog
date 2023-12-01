@@ -5,8 +5,12 @@ from .forms import PostForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_protect
+
+
 # Create your views here.
 @login_required(login_url='login')
+@csrf_protect
 def post(request):
     if request.POST:
         form =PostForm(request.POST,request.FILES)
@@ -69,6 +73,7 @@ def delete_post(request, id):
     return redirect("home")
 
 @login_required(login_url='login')
+@csrf_protect
 def edit_post(request, id):
     selected_post = get_object_or_404(Post, pk=id)
 
