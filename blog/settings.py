@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-import environ
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,28 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-&_-t*qwjp*39_g_5pt4_lp(2xacw6k9*)9%(u1$jlz*p1q30fp'
 
-
-
-env = environ.Env(  # <-- Updated!
-    # set casting, default value
-    DEBUG=(bool, False),
-)
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-# Take environment variables from .env file
-environ.Env.read_env(BASE_DIR / '.env')  # <-- Updated!
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')  # <-- Updated!
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')  # <-- Updated!
+DEBUG = True
 
-# # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.fly.dev']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -109,13 +91,14 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 #     }
 # }
 DATABASES = {
-    'default': env.db(),
-    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': 'database',
-    'USER': 'fl0user',
-    'PASSWORD': 'jlRu4QK5ndIo',
-    'HOST': 'ep-damp-smoke-67209847.ap-southeast-1.aws.neon.fl0.io',
-    'PORT': '5432',
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'database',
+        'USER': 'fl0user',
+        'PASSWORD': 'jlRu4QK5ndIo',
+        'HOST': 'ep-damp-smoke-67209847.ap-southeast-1.aws.neon.fl0.io',
+        'PORT': '5432',
+    }
 }
 
 # Password validation
@@ -153,7 +136,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 
 
@@ -162,7 +145,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR/'static/'
 
 
-CSRF_TRUSTED_ORIGINS = ['https://*.fly.dev']  # <-- Updated!
+CSRF_TRUSTED_ORIGINS=['https://blog-using-django-dev-jsdz.4.us-1.fl0.io/']
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
