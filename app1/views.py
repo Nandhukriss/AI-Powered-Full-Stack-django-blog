@@ -6,7 +6,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_protect
-
+from django.db.models import Q
 
 # Create your views here.
 @login_required(login_url='login')
@@ -54,7 +54,16 @@ def view_post(request):
     admin_posts = Post.objects.filter(name=admin_user).order_by('-date_added').first()
 
     latest_Post = Post.objects.order_by('-date_added')[:2]
+    if request.method == 'POST':
+        your_search_query = request.POST.get('search')
+        all_posts = all_posts.filter(
+            Q(title__icontains=your_search_query) )
+        p = Paginator(all_posts, 6)  # Reapply pagination after filtering
+        page_obj = p.page(1)  # Start at the first page after filtering
+
     context = {'page_obj': page_obj,'latest_posts':latest_Post,'admin_posts':admin_posts}
+
+    
 
     return render(request, 'postshow.html', context)
 
