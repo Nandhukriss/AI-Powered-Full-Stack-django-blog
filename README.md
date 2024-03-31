@@ -1,4 +1,5 @@
-# Public-Tech-Entertainment-Blog-using-Django
+# AI-Powered-Full-Stack-django-blog
+
 
 ## Features
 - Create Blog Post 
