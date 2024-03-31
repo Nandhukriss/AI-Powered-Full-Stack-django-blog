@@ -1,1 +1,6 @@
+
+/media/
+/uploads/
+**/__pycache__/
+db.sqlite3
 .env

@@ -39,10 +39,26 @@
         
         <div class="container text-center w-100 w-md-50 ">
           <form action="" method="post" enctype="multipart/form-data">
-              {% csrf_token %}
-              {{form|crispy}}
-              <button type="submit" class="btn btn-dark w-100 " >Post</button>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-dark w-100 mb-3">Post</button>
           </form>
+            <button type="submit" class="btn btn-outline-primary w-100 mb-3" id="promt-section-btn">Generate Content With Your Prompt 🚀</button>
+            <!-- Loader -->
+            <div class="spinner-grow" style="width: 3rem; height: 3rem;display: none;"id="loader" role="status">
+              <span class="visually-hidden" >Loading...</span>
+            </div>
+              <div class="input-group mb-3 " id="promtSection" style="display:none;">
+                  <input type="text" name="userPrompt" id="userPrompt"  class="form-control p-3 rounded-end  rounded-4  border border-primary " placeholder="Enter Your Prompt...">
+                  <button type="button" id="generateButton" class="btn btn-outline-primary  rounded-start rounded-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-fill" viewBox="0 0 16 16">
+                      <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"/>
+                    </svg>
+                  </button>
+              </div>
+
+
+        
       </div>
       
       </div>
@@ -157,13 +173,97 @@
     </div>
   </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
 
 
+function getToken(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      // Does this cookie string begin with the name we want?
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+      }
+    }
+    }
+    return cookieValue;
+    }
+    const csrftoken = getToken('csrftoken');
+  
+const generateButton = document.getElementById("generateButton");
+const userPromptInput = document.getElementById("userPrompt");
+const blogContentTextarea = document.getElementById("id_blog_content")
+const promtSection = document.getElementById("promtSection")
+const promtSectionBtn = $("#promt-section-btn");
+const loader = $("#loader");
+
+promtSectionBtn.click(function() {
+  // Toggle the visibility of the promtSection
+   $("#promtSection").slideToggle("slow");
+
+  // Toggle the text of the button
+  if ($(this).text() === "Don't want to enter prompt ❌") {
+    $(this).text("Generate Content With Your Prompt 🚀");
+  } else {
+    $(this).text("Don't want to enter prompt ❌");
+  }
+});
+
+generateButton.addEventListener("click", async () => {
+  const prompt = userPromptInput.value.trim();
+ // Clear any previous red border before validation
+ $('#userPrompt').removeClass('border-danger')
+ $('#generateButton').removeClass('border-danger')
+
+ 
+if (!prompt) {
+  $('#userPrompt').addClass('border-danger');
+  $('#generateButton').addClass('border-danger');
+  $('#userPrompt').attr('placeholder', "Can't Submit an Empty Prompt!");
+  return; // Exit the function if prompt is empty
+}
 
 
+  $("#promtSection").hide()
+  // Show loader
+  loader.show();
+
+  try {
+    const response = await fetch("/generate-content/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        'X-CSRFToken':csrftoken,
+        
+      },
+      body: JSON.stringify({ prompt }),
+    });
+    // Hide loader
+    loader.hide();
+    $("#promtSection").show()
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    blogContentTextarea.value=''
+    blogContentTextarea.value = data.generated_text;
+  } catch (error) {
+    // Hide loader
+    loader.hide();
+    $("#promtSection").show()
+
+    console.error("Error:", error);
+    blogContentTextarea.value = "An error occurred. Please try again later.";
+  }
+});
 
 
+</script>
 
-
-<script src="/build/constrast-bootstrap-pro/js/cdb.js"></script>
 {% endblock content %}

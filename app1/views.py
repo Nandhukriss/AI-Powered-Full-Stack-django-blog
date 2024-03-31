@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404,redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import Post
 from .forms import PostForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -7,6 +7,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_protect
 from django.db.models import Q
+from dotenv import load_dotenv
+import google.generativeai as genai
+import json
+import os
+# Load environment variables from .env file
+load_dotenv()
 
 # Create your views here.
 @login_required(login_url='login')
@@ -106,3 +112,32 @@ def error_404_view(request, exception):
    
 
     return render(request, '404.html')
+
+
+
+@login_required(login_url='login')
+def generate_content(request):
+  if request.method == "POST":
+    data = json.loads(request.body.decode('utf-8')) 
+    prompt = data.get("prompt")
+
+    try:
+      genai.configure(api_key=os.getenv('API_KEY'))
+      model = genai.GenerativeModel('gemini-pro')
+      result = model.generate_content(prompt)
+      generated_text = result.text
+
+      response_data = {
+        "generated_text": generated_text,
+        "message": "Here's what I came up with based on your prompt:",
+      }
+
+      return JsonResponse(response_data)
+
+    except Exception as e:
+      # Handle errors and return a JSON response with an error message
+      error_response = {"error_message": str(e)}
+      return JsonResponse(error_response, status=500)
+
+  else:
+    return JsonResponse({"error_message": "Invalid request method"}, status=405)
