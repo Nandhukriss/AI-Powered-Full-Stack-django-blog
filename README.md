@@ -3,6 +3,7 @@
 
 ## Features
 - Create Blog Post 
+- Create Blog Content Using A.I
 - Delete Blog Post
 - Delete Blog Post 
 - Edit Blog Post
