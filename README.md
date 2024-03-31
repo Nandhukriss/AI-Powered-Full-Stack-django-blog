@@ -11,6 +11,11 @@
 - User Profile
 - Detail Post Page
 
+## Working Of Prompt Based Blog Content Generator
+
+https://github.com/Nandhukriss/Public-Tech-Entertainment-Blog-using-Django/assets/103727372/55501fae-c5ce-4ad4-9a40-db0bae383907
+
+
 ## Screenshots
 
 ### Home Page 
@@ -23,10 +28,6 @@
 ### Detail Page
 
 ![blogdetail](https://github.com/Nandhukriss/Public-Tech-Entertainment-Blog-using-Django/assets/103727372/cb06e9cc-382e-4b44-a0e4-950df5a2d63c)
-
-### Your Post Page
-
-![blogmanage](https://github.com/Nandhukriss/Public-Tech-Entertainment-Blog-using-Django/assets/103727372/b5fd9993-5607-4af0-beec-8b79540540ae)
 
 ## Installation
 
