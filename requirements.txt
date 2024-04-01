@@ -1,6 +1,6 @@
 
 crispy-bootstrap5
-Django==4.2.6
+Django
 django-crispy-forms
 gunicorn==21.2.0
 packaging==23.2
