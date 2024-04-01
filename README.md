@@ -1,7 +1,9 @@
-# Public-Tech-Entertainment-Blog-using-Django
+# AI-Powered-Full-Stack-django-blog
+
 
 ## Features
 - Create Blog Post 
+- Create Blog Content Using A.I
 - Delete Blog Post
 - Delete Blog Post 
 - Edit Blog Post
